@@ -1,0 +1,19 @@
+# Docker Compose configuration for k6 + xk6-browser
+# - Build from local Dockerfile and mount your `start.js` so you can edit locally
+# - Override environment variables via a local `.env` file or via CLI
+
+version: '3.8'
+
+services:
+  k6:
+    image: quachuoiscontainer/k6-browser:latest
+    container_name: k6-browser
+    environment:
+      VUS: ${VUS:-20}
+      DURATION: ${DURATION:-15m}
+      VU_OFFSET: ${VU_OFFSET:-700}
+      BROWSER_HEADLESS: ${BROWSER_HEADLESS:-true}
+      K6_BROWSER_ARGS: no-sandbox,disable-setuid-sandbox,disable-dev-shm-usage
+    command: ["run", "/scripts/start.js"]
+    restart: "no"
+
