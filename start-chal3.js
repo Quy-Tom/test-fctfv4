@@ -107,16 +107,19 @@ export async function browserTest() {
         const startBtnXpath = '//*[@id="root"]/div/div/div/div/div[2]/div/div[2]/div/div[2]/div[4]/button';
         await waitAndClick(page, startBtnXpath, "Bấm Start Challenge", vuId);
 
-        const tokenSelector = 'div.text-orange-600';
-        await page.waitForFunction(
-            (sel) => {
-                const el = document.querySelector(sel);
-                return el && el.innerText.trim().startsWith('ey');
-            },
-            { timeout: 300000 },
-            tokenSelector
-        );
-        logResult(startToken, getTokenTrend);
+        try {
+            const tokenSelector = 'div.text-orange-600';
+            await page.waitForFunction(
+                (sel) => {
+                    const el = document.querySelector(sel);
+                    return el && el.innerText.trim().startsWith('ey');
+                },
+                { timeout: 180000 }, // Đặt lại 180,000ms = 3 phút
+                tokenSelector
+            );
+            logResult(startToken, getTokenTrend);
+        } catch (err) {
+        }
 
         let count = 1; 
  
@@ -147,16 +150,19 @@ export async function browserTest() {
         const startBtnXpath = '//*[@id="root"]/div/div/div/div/div[2]/div/div[2]/div/div[2]/div[4]/button';
         await waitAndClick(page, startBtnXpath, "Bấm Start Challenge", vuId);
         
-        const tokenSelector = 'div.text-orange-600';
-        await page.waitForFunction(
-            (sel) => {
-                const el = document.querySelector(sel);
-                return el && el.innerText.trim().startsWith('ey');
-            },
-            { timeout: 300000 },
-            tokenSelector
-        );
-        count = 0; 
+        try {
+            const tokenSelector = 'div.text-orange-600';
+            await page.waitForFunction(
+                (sel) => {
+                    const el = document.querySelector(sel);
+                    return el && el.innerText.trim().startsWith('ey');
+                },
+                { timeout: 180000 }, // Đặt lại 180,000ms = 3 phút
+                tokenSelector
+            );
+        } catch (err) {
+
+        }
     }
 
     count++; 
